@@ -1,7 +1,10 @@
 sc_require('core');
 sc_require('controllers/log');
+sc_require('mixins/busted_observer_paths');
 
-Sandbox.todosController = SC.ArrayController.create({
+Sandbox.todosController = SC.ArrayController.create(
+    
+    Sandbox.BustedObserverPaths, {
     
     loggerBinding: 'Sandbox.logController',
     
@@ -15,6 +18,7 @@ Sandbox.todosController = SC.ArrayController.create({
     },
     
     _pathBasedPropertyNumber: 0,
+    
     pathBasedProperty: function() {
         return this.incrementProperty('_pathBasedPropertyNumber');
     }.property('content*@each.isCompleted').cacheable(),
@@ -30,14 +34,6 @@ Sandbox.todosController = SC.ArrayController.create({
     starEachObserver: function() {
         this.logMessage('observer for `*@each.isCompleted` firing...');
     }.observes('*@each.isCompleted'),
-            
-    eachObserver: function() {
-        this.logMessage('observer for `@each.isCompleted` firing...');
-    }.observes('@each.isCompleted'),
-                
-    dotEachObserver: function() {
-        this.logMessage('observer for `.@each.isCompleted` firing...');
-    }.observes('.@each.isCompleted'),
     
     contentLengthObserver: function() {
         this.logMessage('observer for `content.length` firing...');
