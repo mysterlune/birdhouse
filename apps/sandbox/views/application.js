@@ -85,7 +85,7 @@ Sandbox.ApplicationView = SC.View.extend({
             toolTip: 'Observer path: @each.isSelected',
             numberBinding: SC.Binding.oneWay('Sandbox.todosController.eachPathBasedProperty'),
             value: function () {
-                return 'eachPathBasedProperty worked (' + this.get('number') + ') times';
+                return '@each.isSelected fired (' + this.get('number') + ') times';
             }.property('number').cacheable()
         }),
         
