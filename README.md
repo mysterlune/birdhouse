@@ -10,6 +10,7 @@ Apps in this project are intended to be experimental, though should be thought o
 Sandbox
 
 * Explores using `@each` path part
+* Logger output with auto-scroll
 
 #Questions
 Contact client@turnitin.com with questions.

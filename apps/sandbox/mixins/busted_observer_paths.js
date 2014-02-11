@@ -14,6 +14,14 @@ Sandbox.BustedObserverPaths = {
         } else {
             console.log('Wait! the dot-@each observer "dotEachObserver" is firing in Sandbox.BustedObserverPaths; please promote.')
         }
-    }.observes('.@each.isCompleted')
+    }.observes('.@each.isCompleted'),
+        
+    contentDotEachObserver: function() {
+        if(this.hasOwnProperty('logMessage')) {
+            this.logMessage('Wait! the content-dot-@each observer "dotEachObserver" is firing in Sandbox.BustedObserverPaths; please promote.');
+        } else {
+            console.log('Wait! the content-dot-@each observer "dotEachObserver" is firing in Sandbox.BustedObserverPaths; please promote.')
+        }
+    }.observes('content.@each.isCompleted')
     
 };

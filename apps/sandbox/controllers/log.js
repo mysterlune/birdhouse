@@ -2,6 +2,8 @@ sc_require('core');
 
 Sandbox.logController = SC.ArrayController.create({
 
+    isLoggerDelegate: YES,
+    
     addMessage: function(message, level) {
         message = message || 'No message supplied...';
         level = level || 'debug';
