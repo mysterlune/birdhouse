@@ -1,0 +1,48 @@
+.nav-menu {
+	background: #fff;
+}
+.menu-item {
+	line-height: 30px;
+	padding: 0px 10px;
+	cursor: pointer;
+}
+.status-view {
+	text-align: center;
+}
+/* swipe view example */
+.swipe-view {
+	background: #3399FF;
+}
+.up-swipe {
+	background: sc_static('swipe-up.png');
+	background-position: center center;
+	background-repeat: no-repeat;
+	opacity: 0;
+}
+.down-swipe {
+	background: sc_static('swipe-down.png');
+	background-position: center center;
+	background-repeat: no-repeat;
+	opacity: 0;
+}
+.status-view {
+	text-align: center;
+}
+/* pinch view example */
+.pinch-view {
+	background: #FF6600;
+}
+.pinch-view .oh-noes {
+	color: #fff;
+	text-align: center;
+}
+/* tap view example */
+.tap-view {
+	background: #009933;
+}
+.tap-view .tap-image {
+	background: sc_static('tap.png');
+	background-position: center center;
+	background-repeat: no-repeat;
+	opacity: 0;
+}

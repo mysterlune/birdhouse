@@ -1,0 +1,88 @@
+.nav-menu {
+	background: #fff;
+}
+.menu-item {
+	line-height: 30px;
+	padding: 0px 10px;
+	cursor: pointer;
+}
+/* flow view example */
+div.sc-view.flow-view {
+	border-color: #333;
+	border-style: solid;
+	border-width: 2px;
+	background-color: #fff;
+}
+div.sc-view.flow-item {
+	color: #fff;
+	background-color: #3366FF;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.flow-item .sc-label-view {
+	padding: 0px 5px;
+	line-height: 30px;
+}
+/* child layout view */
+div.sc-view.child-layout-view {
+	border-color: #333;
+	border-style: solid;
+	border-width: 2px;
+	background-color: #fff;
+}
+div.sc-view.child-layout-view .box {
+	border-color: #fff;
+	border-style: solid;
+	border-width: 2px;
+	color: #fff;
+}
+div.sc-view.child-layout-view .box1 { background-color: #3366FF; }
+div.sc-view.child-layout-view .box2 { background-color: #33CC33; }
+div.sc-view.child-layout-view .box3 { background-color: #FF00FF; }
+div.sc-view.child-layout-view .box4 { background-color: #FF9900; }
+div.sc-view.child-layout-view .box .padd-me{
+	padding: 10px;
+}
+/* stacked view */
+div.sc-view.stacked-view {
+	border-color: #333;
+	border-style: solid;
+	border-width: 2px;
+	background-color: #fff;
+}
+div.sc-view.stacked-view .box {
+	border-color: #fff;
+	border-style: solid;
+	border-width: 2px;
+	color: #fff;
+}
+div.sc-view.stacked-view .box1 { background-color: #3366FF; }
+div.sc-view.stacked-view .box2 { background-color: #33CC33; }
+div.sc-view.stacked-view .box3 { background-color: #FF00FF; }
+div.sc-view.stacked-view .box4 { background-color: #FF9900; }
+/* list view */
+div.sc-view.list-view {
+	background-color: #fff;
+}
+div.sc-view.list-view .box {
+	color: #fff;
+}
+div.sc-view.list-view .box1 { background-color: #3366FF; }
+div.sc-view.list-view .box2 { background-color: #33CC33; }
+div.sc-view.list-view .box3 { background-color: #FF00FF; }
+div.sc-view.list-view .box4 { background-color: #FF9900; }
+/* grid view */
+div.sc-view.grid-view {
+	background-color: #fff;
+}
+div.sc-view.grid-view .box {
+	color: #fff;
+}
+div.sc-view.grid-view .box1 { background-color: #3366FF; }
+div.sc-view.grid-view .box2 { background-color: #33CC33; }
+div.sc-view.grid-view .box3 { background-color: #FF00FF; }
+div.sc-view.grid-view .box4 { background-color: #FF9900; }
+div.sc-view.grid-view .box5 { background-color: #660066; }
+div.sc-view.grid-view .box6 { background-color: #CC0000; }
+div.sc-view.grid-view .box7 { background-color: #993300; }
