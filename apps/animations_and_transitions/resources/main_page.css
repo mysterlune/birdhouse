@@ -1,0 +1,26 @@
+.nav-menu {
+	background: #fff;
+}
+.menu-item {
+	line-height: 30px;
+	padding: 0px 10px;
+	cursor: pointer;
+}
+/* animate example */
+.animate-example {
+	background: #fff;
+}
+.animate-view {
+	background: #3399FF;
+}
+/* transition plugin */
+.transition-example .info {
+	padding: 10px;
+}
+.transition-example .demo {
+	background: #fff;
+}
+.transition-example .demo .sample-view {
+	background: #cc0000;
+	color: #fff;
+}
