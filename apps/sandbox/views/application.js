@@ -1,28 +1,18 @@
 sc_require('views/auto_scroll');
 Sandbox.ApplicationView = SC.View.extend({
 
-    childViews: ['header', 'newTodoField', 'todosList', 'footer', 'logView', 'logFooter'],
+    childViews: ['header', 'newTodoField', 'todosList', 'footer', 'propertyPathObserverView', 'logView', 'logFooter'],
     defaultResponder: "Sandbox.statechart", 
 
     header: SC.ToolbarView.design({
         layout: { left: 0, width: 500, top: 0, height: 36 },
 
-        childViews: ['title', 'completeAll', 'pathBasedPropertyLabel'],
+        childViews: ['title', 'completeAll'],
 
         completeAll: SC.CheckboxView.design(SC.AutoResize, {
             autoResizePadding: { width: 47 },
             title: 'Mark all as done',
             valueBinding: 'Sandbox.completedTodosController.areAllCompleted'
-        }),
-        
-        pathBasedPropertyLabel: SC.LabelView.design({
-            layout: { left: 0, right: 130, top: 0, bottom: 0 },
-
-            pathBasedPropertyNumberBinding: SC.Binding.oneWay('Sandbox.todosController.pathBasedProperty'),
-
-            value: function () {
-                return 'Path worked (' + this.get('pathBasedPropertyNumber') + ') times';
-            }.property('pathBasedPropertyNumber').cacheable()
         }),
         
         title: SC.LabelView.design({
@@ -32,7 +22,7 @@ Sandbox.ApplicationView = SC.View.extend({
             completedTodosBinding: SC.Binding.oneWay('Sandbox.completedTodosController.length'),
 
             value: function () {
-                return 'Sandbox (' + (this.get('totalTodos') - this.get('completedTodos')) + ')';
+                return 'Todos (' + (this.get('totalTodos') - this.get('completedTodos')) + ')';
             }.property('totalTodos', 'completedTodos').cacheable()
         })
     }),
@@ -80,8 +70,52 @@ Sandbox.ApplicationView = SC.View.extend({
         })
     }),
     
+    propertyPathObserverView: SC.View.design({
+        layout: { left: 502, width: 500, top: 0 },
+        childViews: [
+            'eachPathBasedPropertyLabel',
+            'dotEachPathBasedPropertyLabel',
+            'starEachPathBasedPropertyLabel',
+            'contentDotEachPathBasedPropertyLabel',
+            'contentStarEachPathBasedPropertyLabel'
+        ],
+        
+        eachPathBasedPropertyLabel: SC.LabelView.design({
+            layout: { left: 5, right: 0, top: 5, bottom: 0 },
+            toolTip: 'Observer path: @each.isSelected',
+            numberBinding: SC.Binding.oneWay('Sandbox.todosController.eachPathBasedProperty'),
+            value: function () {
+                return '@each.isSelected fired (' + this.get('number') + ') times';
+            }.property('number').cacheable()
+        }),
+        
+        dotEachPathBasedPropertyLabel: SC.LabelView.design({
+            layout: { left: 5, right: 0, top: 25, bottom: 0 },
+            toolTip: 'Observer path: .@each.isSelected; see notes in controller code',
+            value: '.@each.isSelected errors when used in property observer chain'
+        }),
+                
+        starEachPathBasedPropertyLabel: SC.LabelView.design({
+            layout: { left: 5, right: 0, top: 45, bottom: 0 },
+            toolTip: 'Observer path: *@each.isSelected; see notes in controller code',
+            value: '*@each.isSelected causes errors when used in property observer chain'
+        }),
+                        
+        contentDotEachPathBasedPropertyLabel: SC.LabelView.design({
+            layout: { left: 5, right: 0, top: 65, bottom: 0 },
+            toolTip: 'Observer path: content.@each.isSelected; see notes in controller code',
+            value: 'content.@each.isSelected causes errors when used in property observer chain'
+        }),
+
+        contentStarEachPathBasedPropertyLabel: SC.LabelView.design({
+            layout: { left: 5, right: 0, top: 85, bottom: 0 },
+            toolTip: 'Observer path: content*@each.isSelected; see notes in controller code',
+            value: 'content*@each.isSelected causes errors when used in property observer chain'
+        }),
+    }),
+    
     logView: Sandbox.AutoScrollView.design({
-        layout: { left: 502, width: 500, top: 0, bottom: 36 },
+        layout: { left: 502, width: 500, top: 105, bottom: 36 },
         autoScrollTriggerBinding: 'Sandbox.logController.length',
         contentView: SC.ListView.design({
             contentBinding: SC.Binding.oneWay('Sandbox.logController'),
