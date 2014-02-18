@@ -1,0 +1,15 @@
+div.sc-view.my-drop-view {
+	background: #fff;
+	border: #ccc 2px dashed;
+}
+.dropzone-browse-btn {
+	text-align: center;
+	background-color: rgb(66, 139, 202);
+	border-color: rgb(53, 126, 189);
+	border-style: solid;
+	border-width: 1px;
+	box-sizing: border-box;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+	line-height: 25px;
+}
