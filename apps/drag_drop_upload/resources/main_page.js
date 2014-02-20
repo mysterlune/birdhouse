@@ -7,88 +7,107 @@
 // This page describes the main user interface for your application.
 DragDropUpload.mainPage = SC.Page.design({
 
-  // The main pane is made visible on screen as soon as your app is loaded.
-  // Add childViews to this pane for views to display immediately on page
-  // load.
-  mainPane: SC.MainPane.design({
-    childViews: ['dropView'],
+    // The main pane is made visible on screen as soon as your app is loaded.
+    // Add childViews to this pane for views to display immediately on page
+    // load.
+    mainPane: SC.MainPane.design({
+        childViews:['menuView', 'displayView'],
 
-    dropView: Dropzone.DropzoneView.design({
-      classNames: ['my-drop-view'],
-      layout: { border: 2,centerX: 0, centerY: 0, width: 300, height: 300 },
+        menuView: SC.ScrollView.design({
+            layout: {left:0, top:0, bottom:0, width:0.2},
+            classNames: ['nav-menu'],
 
-      // set what happens when a file is added
-      addedfile: function(file) {
-        console.log(file);
-      },
+            canScrollVertical:true,
+            hasHorizontalScroller:false,
 
-      // any options that don't regard DOM elements can be set here
-      // however options that do need to be added in the didAppendToDocument
-      // below where the DOM elements will be available.
-      options: {
-        paramName: 'file',
-        /* note we need to setup a server to handle this upload */
-        url: 'http://localhost/test/upload.php',
-        parallelUploads: 5,
-        addRemoveLinks: true,
-        uploadMultiple: false,
-        maxFilesize: 0.5, // MB
-        //forceFallback: true
-      },
+            contentView: SC.CollectionView.design({
+                childViewLayout: SC.View.VERTICAL_STACK,
+                actOnSelect: YES,
 
-      // handle fallback scenarios
-      fallback: function() {
-        console.log('we done did fallback!');
-      },
+                content: new Array(
+                    {
+                        value: "overview",
+                        viewToView: "overviewView"
+                    },
+                    {
+                        value: "single dropzone",
+                        viewToView: 'singleDrop'
+                    },
+                    {
+                        value: "multiple dropzones",
+                        viewToView: 'multiDrop'
+                    }
+                ),
 
-      // any options we want to set where we need DOM elements
-      // need to be set here. Don't forget to call the super class
-      // so dropzone is properly setup.
-      didAppendToDocument  : function() {
-        var options = this.get('options'),
-          uploadBtnLayer = this.get('uploadBtnView').get('layer'),
-          previewsLayer = this.get('previewsContainerView').get('layer');
+                layoutForContentIndex: function(contentIndex) {
+                    return {height:30};// height of each item
+                },
 
-        options.clickable = uploadBtnLayer;
-        options.previewsContainer = previewsLayer;
-        
-        this.set('options', options);
+                exampleView: SC.LabelView.design({
+                    classNames: ['menu-item'],
 
-        return sc_super();
-      },
+                    value: function() {
+                        var content = this.get('content');
+                        if(content) {
+                            return content.value;
+                        }
+                    }.property(),
 
-      // if dropzone doesn't say the browser supports drag'n'drop
-      // or we forced the fallback in the options.
-      didFallback: function () {
-        if(this.get('options')) {
-          return !Dropzone.isBrowserSupported() || this.get('options').forceFallback
-        }
-        return !Dropzone.isBrowserSupported();
-      }.property('options'),
+                    action: function() {
+                        var content = this.get('content');
+                        var view = content.viewToView;
+                        DragDropUpload.mainPage.mainPane.displayView.set('nowShowing',view);
+                    }
+                })
+            })
+        }),
 
-      childViews: ['uploadBtnView', 'previewsContainerView', 'fallbackMessage'],
+        displayView: SC.ContainerView.extend({
+            layout: { left: 0.2 },
 
-      // using a SC.ButtonView seems to interfere with the 
-      // click listener of dropzone so simply use a label view
-      // and style it.
-      uploadBtnView: SC.LabelView.design({
-        layout:{height: 25, top: 10, left: 10, right: 10},
-        classNames: ['dropzone-browse-btn'],
-        value: 'browse for files',
-        optionsBinding: '.parentView.options',
-        isVisibleBinding: SC.Binding.not(".parentView.didFallback")
-      }),
+            nowShowing: 'overviewView',
 
-      previewsContainerView: SC.View.design({
-        layout: {top: 45},
-        isVisibleBinding: SC.Binding.not(".parentView.didFallback")
-      }),
+            overviewView: SC.LabelView.extend({
+                layout: {width: 400, height: 50, centerX: 0, centerY: 0},
+                classNames: ['overview'],
+                value: "This app shows how to implement drag and drop file uploads!"
+            }),
 
-      fallbackMessage: SC.LabelView.design({
-        layout:{top: 10, left: 10, right: 10, bottom: 10},
-        isVisibleBinding: SC.Binding.oneWay(".parentView.didFallback"),
-        value:'Hmm, looks like the browser doesnt support dran\'n\'drop or we forced a fallback.'
-      })
+            singleDrop: DragDropUpload.SingleDropzone.extend({}),
+
+            multiDrop: SC.View.extend({
+                childViews: ['dropOneView', 'dropTwoView'],
+
+                dropOneView: DragDropUpload.SingleDropzone.extend({
+                    layout: {width:300, height:300, centerX:-160, centerY:0},
+
+                    options: {
+                        paramName: 'file',
+                        /* note we need to setup a server to handle this upload */
+                        url: 'http://localhost/test/upload.php?dropView=1',
+                        parallelUploads: 5,
+                        addRemoveLinks: true,
+                        uploadMultiple: false,
+                        maxFilesize: 0.5, // MB
+                        //forceFallback: true
+                    },
+                }),
+
+                dropTwoView: DragDropUpload.SingleDropzone.extend({
+                    layout: {width:300, height:300, centerX:160, centerY:0},
+
+                    options: {
+                        paramName: 'file',
+                        /* note we need to setup a server to handle this upload */
+                        url: 'http://localhost/test/upload.php?dropView=2',
+                        parallelUploads: 5,
+                        addRemoveLinks: true,
+                        uploadMultiple: false,
+                        maxFilesize: 0.5, // MB
+                        //forceFallback: true
+                    },
+                })
+            })
+        })
     })
-  })
 });

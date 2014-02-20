@@ -1,3 +1,16 @@
+.nav-menu {
+	background: #fff;
+}
+.menu-item {
+	line-height: 30px;
+	padding: 0px 10px;
+	cursor: pointer;
+}
+/* over view view */
+.overview {
+	text-align: center;
+}
+/* single dropzone view */
 div.sc-view.my-drop-view {
 	background: #fff;
 	border: #ccc 2px dashed;
