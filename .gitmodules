@@ -1,0 +1,6 @@
+[submodule "frameworks/sproutcore"]
+    path = frameworks/sproutcore
+    url = https://github.com/sproutcore/sproutcore.git
+[submodule "frameworks/third_party/frameworks/rich-text-editor"]
+    path = frameworks/third_party/frameworks/rich-text-editor
+    url=https://github.com/iParadigms/rich-text-editor.git
