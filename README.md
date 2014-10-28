@@ -4,7 +4,11 @@ This is the sandbox area for Client Team development and exploration of SproutCo
 
 Apps in this project are intended to be experimental, though should be thought of a developmental paper trail or _exemplum_ of "how we do X" or "why not do Y like the guide says?"
 
-
+#Prerequesites
+Uses the following configuration:
+* SproutCore 1.10.2 (Gem or included framework (submodule))
+* Ruby 1.9.3-p484
+See [the RVM_SETUP.md](README.md) for specifics on setting up `rvm` and configuring gemsets.
 
 #Apps
 Sandbox
