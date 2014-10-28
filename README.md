@@ -8,7 +8,7 @@ Apps in this project are intended to be experimental, though should be thought o
 Uses the following configuration:
 * SproutCore 1.10.2 (Gem or included framework (submodule))
 * Ruby 1.9.3-p484
-See [the RVM_SETUP.md](README.md) for specifics on setting up `rvm` and configuring gemsets.
+See [the RVM_SETUP.md](RVM_SETUP.md) for specifics on setting up `rvm` and configuring gemsets.
 
 #Apps
 Sandbox
